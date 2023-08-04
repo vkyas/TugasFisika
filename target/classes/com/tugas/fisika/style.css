@@ -1,0 +1,55 @@
+.root {
+    -fx-accent: #373e72;
+    -fx-focus-color: -fx-accent;
+    -fx-base: #373e55;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
+}
+
+.label{
+    -fx-text-fill: lightgray;
+}
+
+.text-field {
+    -fx-background-radius: 2px;
+    -fx-background-color: -fx-text-box-border, -fx-background;
+    -fx-background-insets: 0, 0 0 2 2;
+    -fx-border-radius: 0;
+    -fx-text-fill: lightgray;
+    -fx-prompt-text-fill: lightgray;
+}
+
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-background;
+}
+
+#buttonStart,
+#buttonKinetic,
+#buttonKe,
+#buttonClear,
+#style {
+    -fx-background-radius: 7px;
+    -fx-focus-traversable: false;
+}
+
+#buttonClear:hover {
+    -fx-background-radius: 7px;
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+#buttonStart:hover,
+#buttonKe:hover,
+#style:hover {
+    -fx-background-radius: 7px;
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}
+
+.scroll-pane {
+    -fx-background-insets: 0, 2 2 2 2;
+    -fx-border-radius: 2px;
+    -fx-background-color: white;
+    -fx-background-radius: 2px;
+}
+
