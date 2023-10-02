@@ -15,17 +15,9 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
     @FXML
-    private Button
-            buttonClear,
-            buttonKe,
-            buttonKinetic,
-            buttonStart,
-            style;
+    private Button buttonClear, buttonKe, buttonKinetic, buttonStart, style;
     @FXML
-    private TextField
-            textInp1,
-            textInp2,
-            textInp3;
+    private TextField textInp1, textInp2, textInp3;
     @FXML
     private VBox vbox_message;
 
