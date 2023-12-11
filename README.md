@@ -1,7 +1,7 @@
 # TugasFisika
 # 1. Potential energy 
-![1  PE](https://github.com/vkyas/TugasFisika/assets/124316178/71277115-3740-4965-8d81-81a804623ed7)
+![Screenshot from 2023-12-11 14-52-45](https://github.com/vkyas/TugasFisika/assets/124316178/01909258-9500-4a4c-b2de-5b7f991558a6)
 # 2. Kinetic energy 
-![2  KE](https://github.com/vkyas/TugasFisika/assets/124316178/8fc381c3-bd00-4205-aab5-e661de7f59e8)
-# 3. Mechanical Energy 
-![3  P](https://github.com/vkyas/TugasFisika/assets/124316178/c907c2d5-7af8-4f86-968e-0e3f3e313b7d)
+![Screenshot from 2023-12-11 14-53-36](https://github.com/vkyas/TugasFisika/assets/124316178/564fbc3f-8cdd-4e3a-8b19-3f22e6ffd978)
+# 3. 
+![Screenshot from 2023-12-11 14-54-19](https://github.com/vkyas/TugasFisika/assets/124316178/f7082046-93e6-4280-b265-28137b5ca25c)
