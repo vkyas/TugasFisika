@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,29 +24,29 @@ public class HelloController implements Initializable {
 
     @FXML
     private void setMomentum() {
-        double mass, velocity, momentum;
-        mass = Double.parseDouble(textInp1.getText());
-        velocity = Double.parseDouble(textInp2.getText());
-        momentum = mass *velocity;
-        momentum(momentum);
+        double mass = Double.parseDouble(textInp1.getText());
+        double velocity = Double.parseDouble(textInp2.getText());
+        double momentum = mass * velocity;
+        displayResult("P = " + momentum + " KG·M/S");
     }
 
     private void momentum(double momentum) {
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(30, 28, 5, 10));
-
+        HBox hBox = createHBox();
         Text text = new Text("P = " + momentum + " KG·M/S");
         setVbox_message(hBox, text);
     }
 
     private void potensial(double potensial) {
+        HBox hBox = createHBox();
+        Text text = new Text("PE = " + potensial + " J");
+        setVbox_message(hBox, text);
+    }
+
+    private HBox createHBox() {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER);
         hBox.setPadding(new Insets(30, 28, 5, 10));
-
-        Text text = new Text("PE = " + potensial + " J");
-        setVbox_message(hBox, text);
+        return hBox;
     }
 
     private void setVbox_message(HBox hBox, Text text) {
@@ -57,95 +58,112 @@ public class HelloController implements Initializable {
 
         textFlow.setPadding(new Insets(5, 10, 5, 10));
         vbox_message.getChildren().retainAll();
-        text.setFill(Color.color(0, 0, 0));
+        text.setFill(Color.BLACK);
 
         hBox.getChildren().add(textFlow);
         vbox_message.getChildren().add(hBox);
     }
 
     private void potentialEnergy() {
-        float input1, input2, input3, potensial;
-        input1 = Float.parseFloat(textInp1.getText());
-        input2 = Float.parseFloat(textInp2.getText());
-        input3 = Float.parseFloat(textInp3.getText());
-        potensial = input1 * input2 * input3;
-        potensial(potensial);
+        try {
+            double input1 = Double.parseDouble(textInp1.getText());
+            double input2 = Double.parseDouble(textInp2.getText());
+            double input3 = Double.parseDouble(textInp3.getText());
+            double potensial = input1 * input2 * input3;
+            potensial(potensial);
+        } catch (NumberFormatException e) {
+            displayError("Invalid input. Please enter valid numbers.");
+        }
+    }
+
+    private void displayResult(String result) {
+        HBox hBox = createHBox();
+        Text text = new Text(result);
+        setVbox_message(hBox, text);
+    }
+
+    private void displayError(String errorMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        buttonStart.setOnAction(actionEvent -> potentialEnergy());
 
-        buttonStart.setOnAction(actionEvent -> {
-            potentialEnergy();
-        });
-
-        buttonClear.setOnAction(actionEvent -> {
-            buttonKe.setVisible(false);
-            buttonStart.setLayoutY(256);
-            buttonStart.setVisible(true);
-            style.setVisible(false);
-            textInp1.setPrefWidth(250);
-            textInp1.clear();
-            textInp2.setPromptText("Gravity");
-            textInp2.clear();
-            textInp3.setVisible(true);
-            textInp3.clear();
-            vbox_message.getChildren().clear();
-        });
+        buttonClear.setOnAction(actionEvent -> clearFields());
 
         buttonKe.setOnAction(actionEvent -> {
-            float m, v, kinetikEnergi;
-            m = Float.parseFloat(textInp1.getText());
-            v = Float.parseFloat(textInp2.getText());
-            kinetikEnergi = (float) (0.5 * m * v * v);
-
-            vbox_message.setMinSize(0, 0);
-
-            HBox hBox = new HBox();
-            hBox.setAlignment(Pos.CENTER);
-            HBox hFox = new HBox();
-            vbox_message.getChildren().retainAll();
-            hFox.setAlignment(Pos.CENTER);
-            hBox.setPadding(new Insets(30, 28, 5, 10));
-            hFox.setPadding(new Insets(5, 10, 5, 10));
-
-            Text text = new Text("KE = " + kinetikEnergi + " J");
-//            Text rum = new Text("KE = 1/2 * " + m + " kg " + " * " + (v) + " m/s²");
-            Text rum = new Text();
-            TextFlow textFlow = new TextFlow(text);
-            TextFlow textFlos = new TextFlow(rum);
-            textFlow.setStyle("-fx-color: rgb(239, 242, 255);" +
-                    "-fx-background-color: darkgray; " +
-                    "-fx-background-radius: 15px");
-
-            textFlos.setStyle("-fx-color: rgb(239, 242, 255);" +
-                    "-fx-background-radius: 20px");
-            textFlow.setPadding(new Insets(5, 10, 5, 10));
-            text.setFill(Color.color(0, 0, 0));
-
-            textFlos.setPadding(new Insets(5, 10, 5, 10));
-            rum.setFill(Color.color(0, 0, 0));
-
-            hBox.getChildren().add(textFlow);
-            hFox.getChildren().add(textFlos);
-            vbox_message.getChildren().add(hBox);
-            vbox_message.getChildren().add(hFox);
+            try {
+                double m = Double.parseDouble(textInp1.getText());
+                double v = Double.parseDouble(textInp2.getText());
+                double kinetikEnergi = 0.5 * m * v * v;
+                displayKinetikEnergi(kinetikEnergi);
+            } catch (NumberFormatException e) {
+                displayError("Invalid input. Please enter valid numbers.");
+            }
         });
 
-        buttonKinetic.setOnAction(actionEvent -> {
-            buttonKe.setVisible(true);
-            buttonKe.setLayoutY(219);
-            buttonKe.setPrefWidth(185);
-            buttonStart.setVisible(false);
-            textInp1.clear();
-            textInp1.setPrefWidth(185);
-            textInp2.clear();
-            textInp2.setPromptText("Velocity");
-            textInp3.setVisible(false);
-            style.setVisible(true);
-            vbox_message.getChildren().clear();
-        });
+        buttonKinetic.setOnAction(actionEvent -> setupKineticEnergyCalculation());
     }
 
+    private void displayKinetikEnergi(double kinetikEnergi) {
+        vbox_message.setMinSize(0, 0);
 
+        HBox hBox = createHBox();
+        HBox hFox = createHBox();
+
+        Text text = new Text("KE = " + kinetikEnergi + " J");
+        Text rum = new Text();
+
+        TextFlow textFlow = createTextFlow(text);
+        TextFlow textFlos = createTextFlow(rum);
+
+        hBox.getChildren().add(textFlow);
+        hFox.getChildren().add(textFlos);
+
+        vbox_message.getChildren().addAll(hBox, hFox);
+    }
+
+    private TextFlow createTextFlow(Text text) {
+        TextFlow textFlow = new TextFlow(text);
+        textFlow.setStyle("-fx-color: rgb(239, 242, 255);" +
+                "-fx-background-color: darkgray; " +
+                "-fx-background-radius: 15px");
+
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
+        text.setFill(Color.BLACK);
+        return textFlow;
+    }
+
+    private void clearFields() {
+        buttonKe.setVisible(false);
+        buttonStart.setLayoutY(256);
+        buttonStart.setVisible(true);
+        style.setVisible(false);
+        textInp1.setPrefWidth(250);
+        textInp1.clear();
+        textInp2.setPromptText("Gravity");
+        textInp2.clear();
+        textInp3.setVisible(true);
+        textInp3.clear();
+        vbox_message.getChildren().clear();
+    }
+
+    private void setupKineticEnergyCalculation() {
+        buttonKe.setVisible(true);
+        buttonKe.setLayoutY(219);
+        buttonKe.setPrefWidth(185);
+        buttonStart.setVisible(false);
+        textInp1.clear();
+        textInp1.setPrefWidth(185);
+        textInp2.clear();
+        textInp2.setPromptText("Velocity");
+        textInp3.setVisible(false);
+        style.setVisible(true);
+        vbox_message.getChildren().clear();
+    }
 }
